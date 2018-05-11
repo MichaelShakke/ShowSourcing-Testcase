@@ -1,3 +1,21 @@
-<p>
-  list works!
-</p>
+<h2 class="h2-showsourcing"> {{title}} </h2>
+<div class="row" *ngFor="let product of products | async">
+  <div class="col-md-1">
+    <img class="img-showsourcing" src="{{imgUrls.s}}{{product.images[0].fileName}}" />
+  </div>
+  <div class="col-md-2 text-secondary">
+    <p>{{product.name}}</p>
+  </div>
+  <div class="col-md-2 text-secondary">
+    <p>{{product.category.name}}</p>
+  </div>
+  <div class="col-md-3 text-secondary">
+    <p>{{product.supplier.name}}</p>
+  </div>
+  <div class="col-md-2 text-secondary">
+    <p>{{product.price.value}}</p>
+  </div>
+  <div class="col-md-2 text-secondary">
+    <p>{{product.status.name}}</p>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { Supplier } from './supplier.model';
 import { Price } from './price.model';
 import { ProductStatus } from './productstatus.model';
 
+//Declared only the variables we need for the testcase
 export type Product = {
   id: string;
   images: Image[];

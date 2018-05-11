@@ -3,9 +3,8 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import gql from 'graphql-tag';
-
 import { Product, Products} from '../../models/product.model';
+import { GlobalInterface } from '../../utilities/globalinterface';
 
 @Component({
   selector: 'app-list',
@@ -14,20 +13,15 @@ import { Product, Products} from '../../models/product.model';
 })
 export class ListComponent implements OnInit {
 
+    private imgUrls = GlobalInterface.img_urls;
+    private title: string = "Product List";
     private products: Observable<Product[]>;
 
     constructor(private apollo: Apollo) { }
 
     ngOnInit() {
       this.products = this.apollo.watchQuery<Products>({
-        query : gql`
-          {
-            products(take: 10) {
-              id
-              name
-            }
-        }
-        `
+        query : GlobalInterface.queryProducts
       }).valueChanges
       .pipe(
         map(result => result.data.products)
