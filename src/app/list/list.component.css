@@ -1,0 +1,19 @@
+.h2-showsourcing {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  font-family: Raleway;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+  color: #686b84;
+}
+
+.img-showsourcing{
+  width: 60px;
+  height: 60px;
+  border-radius: 2px;
+}
+
+div {
+  margin-top: 2%;
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#50E3C2" d="M4 4h18v18H4z" style="mix-blend-mode:hard-light"/>
+        <path fill="#F5A623" d="M8.027 1.284l16.69 6.743-6.744 16.69-16.69-6.744z" style="mix-blend-mode:hard-light"/>
+        <path fill="#BD10E0" d="M13 .272L25.728 13 13 25.728.272 13z" style="mix-blend-mode:hard-light"/>
+    </g>
+</svg>
