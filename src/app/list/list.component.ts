@@ -25,7 +25,9 @@ export class ListComponent implements OnInit {
         query : ProductQuery.getProductsList
       }).valueChanges
       .pipe(
-        map(result => result.data.products)
+        map(result => result.data.products
+          .filter(prod => prod.images.length > 0) //No null images
+        )
       );
     }
 }
