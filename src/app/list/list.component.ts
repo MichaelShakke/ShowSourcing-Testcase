@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Product, Products} from '../../models/product.model';
-import { GlobalInterface } from '../../utilities/globalinterface';
+import { URLUtilities } from '../../utilities/URLUtilities';
+import { ProductQuery } from '../../utilities/queries/product.query';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,7 @@ import { GlobalInterface } from '../../utilities/globalinterface';
 })
 export class ListComponent implements OnInit {
 
-    private imgUrls = GlobalInterface.img_urls;
+    private imgUrls = URLUtilities.img_urls;
     private title: string = "Product List";
     private products: Observable<Product[]>;
 
@@ -21,7 +22,7 @@ export class ListComponent implements OnInit {
 
     ngOnInit() {
       this.products = this.apollo.watchQuery<Products>({
-        query : GlobalInterface.queryProducts
+        query : ProductQuery.getProductsList
       }).valueChanges
       .pipe(
         map(result => result.data.products)
