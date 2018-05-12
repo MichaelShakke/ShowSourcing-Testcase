@@ -4,15 +4,14 @@
 }
 
 .navbar-brand {
-  padding-left: 1%;
   padding-top: 0;
 }
 
 .title-showsourcing {
   margin-top: 3%;
   margin-bottom: 3%;
-  font-family: SourceSansPro;
-  font-size: 15px;
+  padding-left: 4%;
+  font-size: 13px;
   text-align: left;
-  color: #ffffff;
+  color: white;
 }

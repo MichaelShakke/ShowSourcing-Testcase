@@ -1,4 +1,24 @@
+/*Global colors variables
+Tried to do it this way but css doesn't work like SASS and variables won't work
+on other css, since the css file can't be imported directly,w e cna only use
+different styles on @Component {{... styleUrls: [css files]}}
+:root{
+  --text-blue-showsourcing: #4a90e2;
+  --text-gray-showsourcing: #9597a9;
+  --bg-dark-showsourcing: #4a4a4a;
+}
+*/
+
 .container-fluid {
-    padding-right: 3%;
-    padding-left: 3%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+/*Global class colors*/
+.text-blue-showsourcing {
+  color: #4a90e2;
+}
+
+.text-gray-showsourcing {
+  color: #9597a9;
 }
