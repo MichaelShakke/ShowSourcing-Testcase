@@ -1,37 +1,45 @@
 .h2-showsourcing {
-  margin-top: 4%;
-  margin-bottom: 4%;
-  font-family: Raleway;
+  margin-top: 2%;
+  margin-bottom: 6%;
   font-size: 24px;
   font-weight: 600;
   text-align: left;
-  color: #686b84;
+  color: #696c85;
 }
 
 .img-showsourcing{
   width: 60px;
   height: 60px;
   border-radius: 2px;
+
 }
 
-div {
-  margin-top: 2%;
+div #productList {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
-select {
+div#productList p {
+  margin-top: 15px;
+}
+
+div#productList select {
     border:none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     -ms-appearance: none; /* get rid of default appearance for IE8, 9 and 10*/
     outline: none;
+    color: #6c757d;
+    margin-top: 15px;
 }
 
-select:focus {
+div#productList select:focus, div#productList select:hover {
   color: #9013fe;
   text-decoration: underline;
+  cursor: pointer;
 }
 
-select:focus option {
+div#productList select:focus option {
   color: #6c757d;
 }

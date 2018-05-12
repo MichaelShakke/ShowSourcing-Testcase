@@ -1,25 +1,28 @@
 <h2 class="h2-showsourcing"> {{title}} </h2>
-<div class="row" *ngFor="let product of products | async">
-  <div class="col-md-1">
-    <img class="img-showsourcing" src="{{imgUrls.s}}{{product.images[0].fileName}}" />
+<div id="productList" *ngFor="let product of products | async">
+  <div class="row">
+    <div id="productImage" class="col-md-1">
+      <img class="img-showsourcing" src="{{imgUrls.s}}{{product.images[0].fileName}}" />
+    </div>
+    <div id="productName" class="col-md-3 text-blue-showsourcing">
+      <p>{{product.name}}</p>
+    </div>
+    <div id="productCategory" class="col-md-2 text-gray-showsourcing">
+      <select>
+        <option *ngFor="let category of categories | async">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+    <div id="productSupplier" class="col-md-3 text-gray-showsourcing">
+      <p>{{product.supplier.name}}</p>
+    </div>
+    <div id="productPrice" class="col-md-2 text-gray-showsourcing">
+      <p>{{product.price.value}} {{product.price.currency}}</p>
+    </div>
+    <div id="productStatus" class="col-md-1 text-gray-showsourcing">
+      <p>{{product.status.name}}</p>
+    </div>
   </div>
-  <div class="col-md-2 text-secondary">
-    <p>{{product.name}}</p>
-  </div>
-  <div class="col-md-2 text-secondary">
-    <select >
-      <option  *ngFor="let category of categories | async">
-        {{category.name}}
-      </option>
-    </select>
-  </div>
-  <div class="col-md-3 text-secondary">
-    <p>{{product.supplier.name}}</p>
-  </div>
-  <div class="col-md-2 text-secondary">
-    <p>{{product.price.value}}</p>
-  </div>
-  <div class="col-md-2 text-secondary">
-    <p>{{product.status.name}}</p>
-  </div>
+  <hr>
 </div>
