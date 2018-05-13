@@ -17,7 +17,6 @@ import { CategoryQuery } from '../../utilities/queries/category.query';
 export class ListComponent implements OnInit {
 
     private imgUrls = URLUtilities.img_urls;
-    private title: string = "Product List";
     private products: Observable<Product[]>;
     private categories: Observable<Category[]>;
 

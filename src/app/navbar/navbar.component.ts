@@ -15,8 +15,6 @@ import { UserQuery } from '../../utilities/queries/user.query';
 })
 export class NavbarComponent implements OnInit {
 
-  private title = {'bold': "Show", "normal": "Sourcing - Test Case"};
-
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
