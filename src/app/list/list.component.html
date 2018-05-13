@@ -8,8 +8,8 @@
       <p>{{product.name}}</p>
     </div>
     <div id="productCategory" class="col-md-2 text-gray-showsourcing">
-      <select>
-        <option *ngFor="let category of categories | async">
+      <select (change)="mutateProduct(product, $event.target.value)">
+        <option *ngFor="let category of categories | async" [selected]="category.name == product.category.name">
           {{category.name}}
         </option>
       </select>

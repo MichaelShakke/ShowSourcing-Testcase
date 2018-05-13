@@ -40,4 +40,8 @@ export class ListComponent implements OnInit {
         map(result => result.data.categories)
       );
     }
+
+    mutateProduct(prod : Product, name_category) {
+
+    }
 }
