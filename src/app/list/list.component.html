@@ -1,5 +1,5 @@
 <h2 class="h2-showsourcing"> {{'PRODUCTLIST_TITLE' | translate}} </h2>
-<div id="productList" *ngFor="let product of products | async">
+<div id="productList" *ngFor="let product of products">
   <div class="row">
     <div id="productImage" class="col-md-1">
       <img class="img-showsourcing" src="{{imgUrls.s}}{{product.images[0].fileName}}" />
@@ -8,8 +8,8 @@
       <p>{{product.name}}</p>
     </div>
     <div id="productCategory" class="col-md-2 text-gray-showsourcing">
-      <select>
-        <option *ngFor="let category of categories | async">
+      <select (change)="mutateProduct(product, $event.target.value)">
+        <option *ngFor="let category of categories" [selected]="category.name == product.category.name">
           {{category.name}}
         </option>
       </select>

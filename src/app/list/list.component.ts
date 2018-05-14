@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { map } from 'rxjs/operators';
+//import { ProductSubscription } from '../../providers/product.subscription';
 
 import { Product, Products } from '../../models/product.model';
 import { Category, Categories } from '../../models/category.model';
@@ -17,26 +19,56 @@ import { CategoryQuery } from '../../utilities/queries/category.query';
 export class ListComponent implements OnInit {
 
     private imgUrls = URLUtilities.img_urls;
-    private products: Observable<Product[]>;
-    private categories: Observable<Category[]>;
+    private QRef: QueryRef<any>;
+    private subsc: Subscription;
+    private products: Product[];
+    private categories: Category[];
 
-    constructor(private apollo: Apollo) { }
+    constructor(private apollo: Apollo) { // private prodSubscription : ProductSubscription
+    }
 
     ngOnInit() {
-      this.products = this.apollo.watchQuery<Products>({
-        query : ProductQuery.getProductsList
-      }).valueChanges
-      .pipe(
-        map(result => result.data.products
-          .filter(prod => prod.images.length > 0) //No null images
-        )
-      );
+      this.subscribeAllProducts();
+      this.queryAllCategories();
+    }
 
-      this.categories = this.apollo.watchQuery<Categories>({
-        query : CategoryQuery.getCategories
+    mutateProduct(prod : Product, name_category) {
+
+    }
+
+    //the supscription is applied to all products and all fields used for this product on this testcase
+    private subscribeAllProducts() {
+      this.QRef = this.apollo.watchQuery({
+        query: ProductQuery.query_allProducts
+      });
+
+      this.subsc = this.QRef.valueChanges.subscribe( ({data}) => {
+        this.products = [...data.products]
+        .filter(prod => prod.images.length > 0);
+      });
+
+      this.QRef.subscribeToMore({
+        document: ProductQuery.subscription_allProducts,
+        updateQuery: (prev, {subscriptionData}) => {
+          if (!subscriptionData.data) {
+            return prev;
+          }
+
+          const newProdList = subscriptionData.data.products;
+
+          return Object.assign({}, prev, {
+            products: [...prev, newProdList ]
+          });
+        }
+      });
+    }
+
+    private queryAllCategories() {
+      this.apollo.watchQuery<Categories>({
+        query : CategoryQuery.query_allCategories
       }).valueChanges
-      .pipe(
-        map(result => result.data.categories)
-      );
+      .subscribe( ({data}) => {
+       this.categories = data.categories;
+     });
     }
 }
