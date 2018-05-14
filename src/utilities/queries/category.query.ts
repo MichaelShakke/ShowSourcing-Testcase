@@ -10,4 +10,11 @@ export class CategoryQuery {
           }
         }
       `
+    static subcriptionCat = gql`
+    subscription {
+      categories {
+        name
+      }
+    }
+    `
 }

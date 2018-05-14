@@ -35,4 +35,38 @@ export class ProductQuery {
     }
   }
   `
+
+  static subscriptionProd = gql`
+  subscription {
+    products {
+      id
+      name
+      images {
+        id
+        fileName
+        imageType
+      }
+      category {
+        id
+        name
+      }
+      supplier {
+        id
+        name
+        fullName
+      }
+      status {
+        id
+        name
+        final
+        color
+      }
+      price {
+        id
+        currency
+        value
+      }
+    }
+  }
+  `
 }

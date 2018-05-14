@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { map } from 'rxjs/operators';
 
 import { Product, Products } from '../../models/product.model';
@@ -17,31 +18,72 @@ import { CategoryQuery } from '../../utilities/queries/category.query';
 export class ListComponent implements OnInit {
 
     private imgUrls = URLUtilities.img_urls;
-    private title: string = "Product List";
-    private products: Observable<Product[]>;
-    private categories: Observable<Category[]>;
+    private prodQR: QueryRef<any>;
+    private prodSubs: Subscription;
+    private products: Product[] = [];
+    private categories: Category[];
 
     constructor(private apollo: Apollo) { }
 
     ngOnInit() {
-      this.products = this.apollo.watchQuery<Products>({
-        query : ProductQuery.getProductsList
-      }).valueChanges
-      .pipe(
-        map(result => result.data.products
-          .filter(prod => prod.images.length > 0) //No null images
-        )
-      );
+      this.productSubscription();
 
-      this.categories = this.apollo.watchQuery<Categories>({
-        query : CategoryQuery.getCategories
-      }).valueChanges
-      .pipe(
-        map(result => result.data.categories)
-      );
     }
 
     mutateProduct(prod : Product, name_category) {
 
     }
+
+    private productSubscription() {
+      this.prodQR = this.apollo.watchQuery({
+        query: ProductQuery.getProductsList
+      });
+
+      this.prodSubs = this.prodQR.valueChanges.subscribe( ({data}) => {
+        this.products = [...data.products]
+        .filter(prod => prod.images.length > 0);
+      });
+
+      this.prodQR.subscribeToMore({
+        document: ProductQuery.subscriptionProd,
+        updateQuery: (prev, {subscriptionData}) => {
+          if (!subscriptionData.data) {
+            return prev;
+          }
+
+          const newProdList = subscriptionData.data.products;
+
+          return Object.assign({}, prev, {
+            products: [...prev, newProdList ]
+          });
+        }
+      });
+    }
+
+    private categorySubscription() {
+      this.prodQR = this.apollo.watchQuery({
+        query: ProductQuery.getProductsList
+      });
+
+      this.prodSubs = this.prodQR.valueChanges.subscribe( ({data}) => {
+        this.products = [...data.products]
+        .filter(prod => prod.images.length > 0);
+      });
+
+      this.prodQR.subscribeToMore({
+        document: ProductQuery.subscriptionProd,
+        updateQuery: (prev, {subscriptionData}) => {
+          if (!subscriptionData.data) {
+            return prev;
+          }
+
+          const newProdList = subscriptionData.data.products;
+
+          return Object.assign({}, prev, {
+            products: [...prev, newProdList ]
+          });
+        }
+      });
+    }
+
 }
