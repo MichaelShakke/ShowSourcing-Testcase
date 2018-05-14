@@ -69,4 +69,20 @@ export class ProductQuery {
     }
   }
   `
+
+  static mutation_category = gql`
+    mutation productCategoryUpdate ($idp: ID!, $idc: ID!){
+    	updateProduct(input : {
+        id: $idp,
+        category: {id: $idc}
+      }) {
+    	  id
+        name
+        category {
+          id
+          name
+        }
+    	}
+    }
+  `
 }

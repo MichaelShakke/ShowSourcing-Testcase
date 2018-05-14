@@ -1,5 +1,7 @@
 {
   "NAV_TITLE" : "Sourcing",
   "NAV_TITLE_BOLD" : "Show",
+  "NAV_TESTCASE" : "Caso de Prueba",
+  "NAV_CONTRIBUTOR" : "Contribuyente del caso",
   "PRODUCTLIST_TITLE" : "Lista de Productos"
 }
