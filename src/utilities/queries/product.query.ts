@@ -71,16 +71,37 @@ export class ProductQuery {
   `
 
   static mutation_category = gql`
-    mutation productCategoryUpdate ($idp: ID!, $idc: ID!){
+    mutation productCategoryUpdate ($idp: String!, $idc: String!){
     	updateProduct(input : {
         id: $idp,
         category: {id: $idc}
       }) {
-    	  id
+        id
         name
+        images {
+          id
+          fileName
+          imageType
+        }
         category {
           id
           name
+        }
+        supplier {
+          id
+          name
+          fullName
+        }
+        status {
+          id
+          name
+          final
+          color
+        }
+        price {
+          id
+          currency
+          value
         }
     	}
     }

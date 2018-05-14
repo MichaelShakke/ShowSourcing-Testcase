@@ -23,7 +23,6 @@ export class ListComponent implements OnInit {
     private subsc: Subscription;
     private products: Product[];
     private categories: Category[];
-    private selected: any;
 
     constructor(private apollo: Apollo) { // private prodSubscription : ProductSubscription
     }
@@ -31,6 +30,18 @@ export class ListComponent implements OnInit {
     ngOnInit() {
       this.subscribeAllProducts();
       this.queryAllCategories();
+    }
+
+    //replace is the product we want to keep,
+    //replaced is the id of the product we are replacing
+    replaceCategory(replace : Product, replaced: string) {
+      this.apollo.mutate({
+        mutation: ProductQuery.mutation_category,
+        variables : {
+          idp: replace.id,
+          idc: replaced
+        }
+      }).subscribe();
     }
 
     //the supscription is applied to all products and all fields used for this product on this testcase

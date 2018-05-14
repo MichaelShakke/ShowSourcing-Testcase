@@ -6,6 +6,7 @@ export class CategoryQuery {
   static query_allCategories = gql`
         {
           categories {
+            id
             name
           }
         }
@@ -13,6 +14,7 @@ export class CategoryQuery {
     static subscription_allCategories = gql`
     subscription {
       categories {
+        id
         name
       }
     }

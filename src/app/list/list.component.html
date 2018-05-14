@@ -8,8 +8,8 @@
       <p>{{product.name}}</p>
     </div>
     <div id="productCategory" class="col-md-2 text-gray-showsourcing">
-      <select>
-        <option *ngFor="let category of categories" [selected]="category.name == product.category.name">
+      <select (change)="replaceCategory(product, $event.target.value)">
+        <option [value]="category.id" *ngFor="let category of categories" [selected]="category.id == product.category.id" >
           {{ category.name }}
         </option>
       </select>
