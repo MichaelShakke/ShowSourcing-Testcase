@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
 
     private imgUrls = URLUtilities.img_urls;
     private products: Observable<Product[]>;
-    private categories: Observable<Category[]>;
+    private categories: Category[];
 
     constructor(private apollo: Apollo) { }
 
@@ -32,11 +32,10 @@ export class ListComponent implements OnInit {
         )
       );
 
-      this.categories = this.apollo.watchQuery<Categories>({
+      this.apollo.watchQuery<Categories>({
         query : CategoryQuery.getCategories
-      }).valueChanges
-      .pipe(
-        map(result => result.data.categories)
-      );
+      }).valueChanges.subscribe( ({data}) => {
+        this.categories = data.categories;
+      });
     }
 }

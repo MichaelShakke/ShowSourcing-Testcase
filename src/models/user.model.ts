@@ -5,3 +5,7 @@ export type User = {
   lastName: string;
   email: string;
 }
+
+export type Users = {
+  users: User[];
+}
