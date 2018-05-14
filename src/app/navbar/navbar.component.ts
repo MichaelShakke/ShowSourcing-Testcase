@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.apollo.watchQuery<Users>({
-      query : UserQuery.getUserWithId
+      query : UserQuery.query_getUserById
     }).valueChanges.subscribe(({data}) => {
       this.users = {
         'id' : data.users[0].id,
