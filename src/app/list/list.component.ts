@@ -52,9 +52,8 @@ export class ListComponent implements OnInit {
           }
 
           const newProdList = subscriptionData.data.products;
-
           return Object.assign({}, prev, {
-            products: [...prev, newProdList ]
+            products: [ ...newProdList ]
           });
         }
       });
