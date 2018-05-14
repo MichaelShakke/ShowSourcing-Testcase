@@ -2,12 +2,12 @@
   <a class="navbar-brand" href="#">
     <img class="Logo" src="assets/logo/logo.svg">
     <span class="title-showsourcing">
-       <strong>{{ 'NAV_TITLE_BOLD' | translate }}</strong>{{ 'NAV_TITLE' | translate }}
+       <strong>{{ 'NAV_TITLE_BOLD' | translate }}</strong>{{ 'NAV_TITLE' | translate }} - {{ 'NAV_TESTCASE' | translate }}
      </span>
   </a>
   <ul class="navbar-nav justify-content-end" >
-    <li class="nav-item" >
-      <a class="nav-link" href="#">{{users.firstName}}</a>
+    <li class="nav-item title-showsourcing" >
+      {{ 'NAV_CONTRIBUTOR' | translate }}: {{users.firstName}}
     </li>
   </ul>
 </nav>

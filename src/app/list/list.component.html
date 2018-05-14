@@ -8,9 +8,9 @@
       <p>{{product.name}}</p>
     </div>
     <div id="productCategory" class="col-md-2 text-gray-showsourcing">
-      <select (change)="mutateProduct(product, $event.target.value)">
+      <select>
         <option *ngFor="let category of categories" [selected]="category.name == product.category.name">
-          {{category.name}}
+          {{ category.name }}
         </option>
       </select>
     </div>

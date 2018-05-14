@@ -3,7 +3,7 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs/Subscription';
 import { map } from 'rxjs/operators';
-//import { ProductSubscription } from '../../providers/product.subscription';
+//import { ProductSubscription } from '../../providers/product.subscription'; //Read productionsubscription.ts
 
 import { Product, Products } from '../../models/product.model';
 import { Category, Categories } from '../../models/category.model';
@@ -23,6 +23,7 @@ export class ListComponent implements OnInit {
     private subsc: Subscription;
     private products: Product[];
     private categories: Category[];
+    private selected: any;
 
     constructor(private apollo: Apollo) { // private prodSubscription : ProductSubscription
     }
@@ -30,10 +31,6 @@ export class ListComponent implements OnInit {
     ngOnInit() {
       this.subscribeAllProducts();
       this.queryAllCategories();
-    }
-
-    mutateProduct(prod : Product, name_category) {
-
     }
 
     //the supscription is applied to all products and all fields used for this product on this testcase
