@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { AppApolloModule } from '../providers/apollo.module';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { ProductSubscription } from '../providers/product.subscription';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -31,7 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [],
+  providers: [ProductSubscription],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

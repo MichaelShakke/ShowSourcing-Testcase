@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 //All product queries are declared here
 export class ProductQuery {
-  static getProductsList = gql`
+  static query_allProducts = gql`
   {
     products {
       id
@@ -36,7 +36,7 @@ export class ProductQuery {
   }
   `
 
-  static subscriptionProd = gql`
+  static subscription_allProducts = gql`
   subscription {
     products {
       id
