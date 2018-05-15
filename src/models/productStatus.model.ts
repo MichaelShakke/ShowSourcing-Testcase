@@ -1,5 +1,5 @@
 //Declared only the variables we need for the testcase
-export type ProductStatus = {
+export interface ProductStatus {
   id: string;
   name: string;
   final: boolean;

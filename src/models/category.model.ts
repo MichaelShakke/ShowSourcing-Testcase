@@ -1,9 +1,9 @@
 //Declared only the variables we need for the testcase
-export type Category = {
+export interface Category {
   id: string;
   name: string;
 }
 
-export type Categories = {
+export interface Categories {
   categories : Category[];
 }

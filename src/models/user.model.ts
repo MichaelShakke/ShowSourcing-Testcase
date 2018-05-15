@@ -1,11 +1,11 @@
 //Declared only the variables we need for the testcase
-export type User = {
+export interface User {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
-export type Users = {
+export interface Users {
   users: User[];
 }

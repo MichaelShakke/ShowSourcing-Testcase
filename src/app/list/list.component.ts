@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { map } from 'rxjs/operators';
 //import { ProductSubscription } from '../../providers/product.subscription'; //Read productionsubscription.ts

@@ -1,5 +1,5 @@
 //Declared only the variables we need for the testcase
-export type Supplier = {
+export interface Supplier {
   id: string;
   name: string;
   fullName: string;

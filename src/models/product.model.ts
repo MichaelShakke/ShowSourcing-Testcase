@@ -5,7 +5,7 @@ import { Price } from './price.model';
 import { ProductStatus } from './productstatus.model';
 
 //Declared only the variables we need for the testcase
-export type Product = {
+export interface Product {
   id: string;
   images: Image[];
   name: string;
@@ -15,6 +15,6 @@ export type Product = {
   status: ProductStatus;
 }
 
-export type Products = {
+export interface Products {
   products: Product[];
 }
