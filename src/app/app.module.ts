@@ -4,12 +4,11 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
+import { ListModule } from './list/list.module';
 
 import { AppComponent } from './app.component';
-import { ListComponent } from './list/list.component';
 import { AppApolloModule } from '../providers/apollo.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ProductSubscription } from '../providers/product.subscription';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -18,7 +17,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent,
     NavbarComponent
   ],
   imports: [
@@ -31,9 +29,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    ListModule.forRoot(),
     FormsModule,
   ],
-  providers: [ProductSubscription],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

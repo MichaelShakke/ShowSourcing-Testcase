@@ -1,81 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { map } from 'rxjs/operators';
-//import { ProductSubscription } from '../../providers/product.subscription'; //Read productionsubscription.ts
+import { map } from 'rxjs/operators/map';
+import "rxjs/add/operator/takeWhile";
+import { ListService } from '../../providers/list.service';
 
 import { Product, Products } from '../../models/product.model';
 import { Category, Categories } from '../../models/category.model';
 import { URLUtilities } from '../../utilities/URLUtilities';
-import { ProductQuery } from '../../utilities/queries/product.query';
-import { CategoryQuery } from '../../utilities/queries/category.query';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css', '../app.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
     private imgUrls = URLUtilities.img_urls;
     private QRef: QueryRef<any>;
-    private subsc: Subscription;
-    private products: Product[];
-    private categories: Category[];
+    private products: Observable<Product[]>;
+    private categories: Observable<Category[]>;
+    private alive: boolean = true;
 
-    constructor(private apollo: Apollo) { // private prodSubscription : ProductSubscription
+    constructor(private apollo: Apollo, private listService : ListService) {
     }
 
     ngOnInit() {
-      this.subscribeAllProducts();
-      this.queryAllCategories();
+      this.getProducts();
+      this.getCategories();
+    }
+
+    getProducts() {
+      this.products = this.listService.getProducts();
+      this.products
+        .takeWhile(() => this.alive)
+        .subscribe();
+    }
+
+    getCategories() {
+      this.categories = this.listService.getCategories();
+      this.categories
+        .takeWhile(() => this.alive)
+        .subscribe();
     }
 
     //replace is the product we want to keep,
-    //replaced is the id of the product we are replacing
+    //replaced is the id of the category we are replacing
     replaceCategory(replace : Product, replaced: string) {
-      this.apollo.mutate({
-        mutation: ProductQuery.mutation_category,
-        variables : {
-          idp: replace.id,
-          idc: replaced
-        }
-      }).subscribe();
+      this.listService.mutateCategory(replace.id, replaced)
+      .takeWhile(() => this.alive)
+        .subscribe();
     }
-
-    //the supscription is applied to all products and all fields used for this product on this testcase
-    private subscribeAllProducts() {
-      this.QRef = this.apollo.watchQuery({
-        query: ProductQuery.query_allProducts
-      });
-
-      this.subsc = this.QRef.valueChanges.subscribe( ({data}) => {
-        this.products = [...data.products]
-        .filter(prod => prod.images.length > 0);
-      });
-
-      this.QRef.subscribeToMore({
-        document: ProductQuery.subscription_allProducts,
-        updateQuery: (prev, {subscriptionData}) => {
-          if (!subscriptionData.data) {
-            return prev;
-          }
-
-          const newProdList = subscriptionData.data.products;
-          return Object.assign({}, prev, {
-            products: [ ...newProdList ]
-          });
-        }
-      });
-    }
-
-    private queryAllCategories() {
-      this.apollo.watchQuery<Categories>({
-        query : CategoryQuery.query_allCategories
-      }).valueChanges
-      .subscribe( ({data}) => {
-       this.categories = data.categories;
-     });
+    
+    ngOnDestroy() {
+      this.alive = false;
     }
 }
