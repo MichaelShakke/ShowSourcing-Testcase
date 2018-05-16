@@ -22,7 +22,9 @@ export class ListService {
      this.QRef = this.apollo.watchQuery<Products>({
       query: ProductQuery.query_allProducts
     });
-    let products = this.QRef.valueChanges.map((data) => data.data.products);
+    let products = this.QRef.valueChanges
+      .map((data) =>
+       data.data.products.filter(prod => prod.images.length > 0));
 
     this.QRef.subscribeToMore({
       document: ProductQuery.subscription_allProducts,
